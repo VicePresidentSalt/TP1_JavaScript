@@ -1,0 +1,13 @@
+﻿
+.prog {
+	background-color:#3CF;
+}
+
+.preformatted {
+  font-family: monospace;
+  white-space: pre;
+  background-color:#999;
+  border-style:solid;
+  border-color:#000;
+}
+
