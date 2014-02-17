@@ -93,11 +93,9 @@ document.addEventListener('keydown',lireSpecial);
 
 document.addEventListener('keydown',lireUnbackspace);
 
-<<<<<<< HEAD
 function peinturerTexte() {
    var zone = document.getElementById("zoneCode");
    zone.innerHTML = peinturer(zone.innerText);
 }
 
-=======
->>>>>>> brup brup
+
