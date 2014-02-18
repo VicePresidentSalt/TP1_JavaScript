@@ -1,12 +1,50 @@
 // JavaScript source code
 function keyWord() {
    return [ "break", "case", "catch", "continue", "debugger", "default", "delete", "do", 
-   "else", "finally", "for", "function", "if", "in", "instanceof", "new", "return", "switch", 
-   "this", "throw", "try", "typeof", "var", "void", "while", "with" ];
+      "else", "finally", "for", "function", "if", "in", "instanceof", "new", "return", "switch", 
+      "this", "throw", "try", "typeof", "var", "void", "while", "with" ];
 }
+function formaterTexte() {
+   var chaine = document.getElementById("Editeur");
+   chaine.innerHTML = formater(chaine.innerText);
+}
+
+function trouverDans(val,tab) {
+   for(var i = 0; i != tab.length; ++i) {
+      if (val == tab[i]) {
+         return i;
+      }
+      return tab.length;
+   }
+}
+
+function formater(s) {
+   var temp = "";
+   var result = "";
+   var pos = 0;
+   while (pos != s.length) {
+      // consommer blancs au début
+      var prochain = trouverSi(s,pos,négation(isSpace));
+      result += subStr(s,pos,prochain);
+      pos = prochain;
+      // consommer mot
+      if (pos != s.length) {
+         prochain = trouverSi(s,pos,isSpace);
+         temp = subStr(s,pos,prochain);
+         if(temp == keyWord()){
+
+         }
+         pos = prochain;
+         result += temp;
+      }
+   }
+   return result;
+}
+
+
 function isSpace(c) {
    return c == ' '  || c == '\n' || c == '\r' ||
-          c == '\f' || c == '\t' || c == '\v';
+      c == '\f' || c == '\t' || c == '\v';
 }
 
 function négation(f) {
@@ -28,46 +66,42 @@ function trouverSi(s,pos,f) {
    }
    return pos;
 }
-
-
-function trouverDans(val,tab) {
-   for(var i = 0; i != tab.length; ++i) {
-      if (val == tab[i]) {
-         return i;
-      }
-      return tab.length;
-}
-
-
+/*
 function formater(s) {
-   var temp = "";
+   var mots = keyWord();
    var result = "";
    var pos = 0;
    while (pos != s.length) {
       // consommer blancs au début
       var prochain = trouverSi(s,pos,négation(isSpace));
-      result += subStr(s,pos,prochain);
+      result = subStr(s,pos,prochain);
       pos = prochain;
       // consommer mot
       if (pos != s.length) {
          prochain = trouverSi(s,pos,isSpace);
-         temp = subStr(s,pos,prochain);
-         if(temp == keyWord()){
-
+         // résultat += "<u>" + s[pos] + "</u>";
+         // résultat += subStr(s,pos+1,prochain);
+         var mot = subStr(s,pos,prochain);
+         if (trouverDans(mot,mots) != mots.length) {
+            résultat += "<strong>" + mot + "</strong>";
+         } 
+         else{
+            résultat += mot;
          }
          pos = prochain;
-         résultat += temp;
       }
    }
-   return result;
+   return résultat;
 }
+*/
+
 
 
 function lireUneTouche(event) {
-  
-  var dir = document.getElementById("Editeur"); 
-  
-  dir.innerHTML = formater(dir.textContent + String.fromCharCode(event.which)); 
+
+   var dir = document.getElementById("Editeur"); 
+
+   dir.innerHTML = formater(dir.textContent + String.fromCharCode(event.which)); 
 }
 document.addEventListener('keypress', lireUneTouche);
 
@@ -89,46 +123,8 @@ function lireUnbackspace(event) {
 }
 
 document.addEventListener('keydown',lireUnbackspace);
-/*
-function formaterTexte() {
-   var chaine = document.getElementById("Editeur");
-   chaine.innerHTML = formater(chaine.innerText);
-}
-*/
 
-/*
-function formater(s) {
-   var Temp = "";
-   var mots = keyWord();
-   var résultat = "";
-   var pos = 0;
-   while (pos != s.length) {
-      // consommer blancs au début
-      var prochain = trouverSi(s,pos,négation(isSpace));
-      temp = subStr(s,pos,prochain);
-      if(temp == keyWord()){
-         pos = prochain;
-         résultat += temp;
-      }
-      //résultat += subStr(s,pos,prochain);
-      // pos = prochain;
-      // consommer mot
-      //if (pos != s.length) {
-      // prochain = trouverSi(s,pos,isSpace);
-      // résultat += "<u>" + s[pos] + "</u>";
-      //  résultat += subStr(s,pos+1,prochain);
-      //  var mot = subStr(s,pos,prochain);
-      //if (trouverDans(mot,mots) != mots.length) {
-      //résultat += "<strong>" + mot + "</strong>";
-      //  } else {
-      //     résultat += mot;
-      //  }
-      
-   }
-   return résultat;
-}
 
-*/
 
 
 
