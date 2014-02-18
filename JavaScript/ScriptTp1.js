@@ -31,8 +31,8 @@ function formater(s) {
       if (pos != s.length) {
          prochain = trouverSi(s,pos,isSpace);
          temp = subStr(s,pos,prochain);
-         if(temp == keyWord()){
-
+         if(result == keyWord()){
+          result += "<u>" + temp + "</u>";     
          }
          pos = prochain;
          result += temp;
