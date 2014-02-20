@@ -80,8 +80,11 @@ function lireUneTouche(event) {
 }
 document.addEventListener('keypress', lireUneTouche);
 
-function lireUnbackspace(event) {
-      var dir = document.getElementById("Editeur");
+function lireUnspecial(event) {
+    var dir = document.getElementById("Editeur");
+    if (event.keyCode == 13) {
+        document.getElementById("Editeur").innerHTML += "\n";
+    }
       if(event.keyCode == 8 ){
          if(dir.textContent.length >= 0){
          dir.innerHTML = formater(dir.textContent.substring(0,dir.textContent.length-1));
@@ -93,7 +96,7 @@ function lireUnbackspace(event) {
 
    }
 }
-document.addEventListener('keydown',lireUnbackspace);
+document.addEventListener('keydown', lireUnspecial);
 
 
 
