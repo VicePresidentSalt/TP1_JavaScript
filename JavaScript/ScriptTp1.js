@@ -1,8 +1,15 @@
 // JavaScript source code
-function keyWord() {
-   return [ "break", "case", "catch", "continue", "debugger", "default", "delete", "do", 
+function keyWord( mot ) {
+   var tableau = [ "break", "case", "catch", "continue", "debugger", "default", "delete", "do", 
       "else", "finally", "for", "function", "if", "in", "instanceof", "new", "return", "switch", 
       "this", "throw", "try", "typeof", "var", "void", "while", "with" ];
+      for (var i = 0; i < tableau.length; i++) {
+         if (mot ==tableau[i])
+         {
+            return true;
+         }
+      }
+
 }
 function formaterTexte() {
    var chaine = document.getElementById("Editeur");
@@ -18,21 +25,19 @@ function trouverDans(val,tab) {
    }
 }
 
-function formater(s) {
+function formater(s) { 
    var temp = "";
    var result = "";
    var pos = 0;
    while (pos != s.length) {
-      // consommer blancs au début
       var prochain = trouverSi(s,pos,négation(isSpace));
       result += subStr(s,pos,prochain);
       pos = prochain;
-      // consommer mot
       if (pos != s.length) {
          prochain = trouverSi(s,pos,isSpace);
          temp = subStr(s,pos,prochain);
-         if(result == keyWord()){
-          result += "<u>" + temp + "</u>";     
+         if(keyWord(temp)){
+          temp = "<b>" + temp + "</b>";     
          }
          pos = prochain;
          result += temp;
@@ -52,7 +57,7 @@ function négation(f) {
       return !f(arg);
    };
 }
-function subStr(s,début,fin) { // suppose début et fin Ok
+function subStr(s,début,fin) {
    var résultat = "";
    for(; début != fin; ++début) {
       résultat += s[début];
@@ -66,63 +71,71 @@ function trouverSi(s,pos,f) {
    }
    return pos;
 }
-/*
-function formater(s) {
-   var mots = keyWord();
-   var result = "";
-   var pos = 0;
-   while (pos != s.length) {
-      // consommer blancs au début
-      var prochain = trouverSi(s,pos,négation(isSpace));
-      result = subStr(s,pos,prochain);
-      pos = prochain;
-      // consommer mot
-      if (pos != s.length) {
-         prochain = trouverSi(s,pos,isSpace);
-         // résultat += "<u>" + s[pos] + "</u>";
-         // résultat += subStr(s,pos+1,prochain);
-         var mot = subStr(s,pos,prochain);
-         if (trouverDans(mot,mots) != mots.length) {
-            résultat += "<strong>" + mot + "</strong>";
-         } 
-         else{
-            résultat += mot;
-         }
-         pos = prochain;
-      }
-   }
-   return résultat;
-}
-*/
-
-
-
 function lireUneTouche(event) {
-
    var dir = document.getElementById("Editeur"); 
-
-   dir.innerHTML = formater(dir.textContent + String.fromCharCode(event.which)); 
+   if (event.which != 0 && event.charCode != 0){
+      dir.innerHTML = formater(dir.textContent + String.fromCharCode(event.which)); 
+      formaterTexte();
+   }
 }
 document.addEventListener('keypress', lireUneTouche);
 
-function lireSpecial(event) {
-   //BS
-   var dir = document.getElementById("Editeur");
-
-   if(event.keyCode == '8' && dir.innerHTML.length >= 1){
-      dir.innerHTML = dir.innerHTML.substring(0,dir.innerHTML.length-1);
-   }
-}
-document.addEventListener('keydown',lireSpecial);
-
 function lireUnbackspace(event) {
-   var dir = document.getElementById("Editeur");
-   if(event.keyCode == '8' && dir.textContent.length >= 1){
-      dir.textContent.substring(0,dir.textContent.length-1);
+      var dir = document.getElementById("Editeur");
+      if(event.keyCode == 8 ){
+         if(dir.textContent.length >= 0){
+         dir.innerHTML = formater(dir.textContent.substring(0,dir.textContent.length-1));
+         event.preventDefault();
+      }
+      else{
+         event.preventDefault();
+      }
+
    }
 }
-
 document.addEventListener('keydown',lireUnbackspace);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+function lireBackspace(event){
+        var str = document.getElementById("ZoneText").textContent;
+         if(event.keyCode == 8 && str.length >0){
+            str.substring(0,str.length-1);
+            document.getElementById("ZoneText").innerHTML = str.substring(0,str.length-1);
+         }
+    }
+
+document.addEventListener('keydown',lireBackspace);
+*/
+
 
 
 
