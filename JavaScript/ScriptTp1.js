@@ -73,7 +73,7 @@ function trouverSi(s,pos,f) {
 }
 function lireUneTouche(event) {
    var dir = document.getElementById("Editeur"); 
-   if (event.which != 0 && event.charCode != 0){
+   if (event.which != 0 && event.charCode != 0 && event.keyCode != 13 ){
       dir.innerHTML = formater(dir.textContent + String.fromCharCode(event.which)); 
       formaterTexte();
    }
