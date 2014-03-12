@@ -4,28 +4,58 @@
 <head>
     <meta charset="utf-8" />
     <title>Tp1 Daren-ken St-laurent et Francis Coté</title>
-<link href="Css/editeur.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="JavaScript/clavier.js"></script>
-<script type="text/javascript" src="JavaScript/algos.js"></script>
+    <link href="Css/editeur.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        function lireUneTouche(event) {
+            var contenu = document.getElementById("Editeur");
+            if (event.which != 0 && event.charCode != 0 && event.keyCode != 13) {
+                contenu.innerHTML = formater(contenu.textContent + String.fromCharCode(event.which));
+                formaterTexte();
+            }
+        }
+        document.addEventListener('keypress', lireUneTouche);
+
+        function lireUnSpecial(event) {
+            var contenu = document.getElementById("Editeur");
+            if (event.keyCode == 13) {
+                contenu.innerHTML += "\n";
+            }
+            else if (event.keyCode == 8) {
+                event.preventDefault();
+                if (contenu.textContent.length >= 0) {
+                    contenu.innerHTML = formater(contenu.textContent.substring(0, contenu.textContent.length - 1));
+                }
+            }
+
+        }
+        document.addEventListener('keydown', lireUnSpecial);
+
+        function formaterTexte() {
+            var contenu = document.getElementById("Editeur");
+            contenu.innerHTML = formater(contenu.innerText);
+        }
+    </script>
+    <script type="text/javascript" src="JavaScript/clavier.js"></script>
+    <script type="text/javascript" src="JavaScript/algos.js"></script>
 </head>
 <body class="prog">
-    <div class="prog">
-    <h1>Formateur de texte</h1>
+    <div>
+        <h1>Formateur de texte</h1>
         <div id="Editeur" class="preformatted">
-        <span class="Numerote">test</span>       
-        
         </div>
-        <br>
-        <table align="center" border="1" id="Compteur" class="compteur">
-        <tr> 
-        <td id="Mots">Mots : 0</td>
-        <td id="Ligne">Ligne : 0</td>
-        <td id="Colonne">Colonne : 0</td>
-        <td id="Char">Charactères : 0</td>
-        <td id="Curpolignes">Ligne Curseur : 0</td>
-        <td id="Curposcolonne">Colonne Curseur : 0</td>
-        </tr>
-        <table>
+        <br />
+        <div class="compteur">
+            <table id="Compteur" class="compteur">
+                <tr>
+                    <td id="Mots">Mots : 0</td>
+                    <td id="Ligne">Ligne : 0</td>
+                    <td id="Colonne">Colonne : 0</td>
+                    <td id="Char">Charactères : 0</td>
+                    <td id="Curposlignes">Ligne Curseur : 0</td>
+                    <td id="Curposcolonne">Colonne Curseur : 0</td>
+                </tr>
+            </table>
+        </div>
     </div>
 </body>
 </html>
