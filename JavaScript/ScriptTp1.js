@@ -5,11 +5,11 @@ function keyWord( mot ) {
       "else", "finally", "for", "function", "if", "in", "instanceof", "new", "return", "switch", 
       "this", "throw", "try", "typeof", "var", "void", "while", "with" ];
       for (var i = 0; i < tableau.length; i++) {
-         if (mot ==tableau[i])
-         {
+         if (mot ==tableau[i]){
             return true;
-         }
+         } 
       }
+      return false;
 
 }
 function formaterTexte() {
