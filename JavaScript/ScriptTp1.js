@@ -84,16 +84,16 @@ document.addEventListener('keypress', lireUneTouche);
 function lireUnspecial(event) {
     var dir = document.getElementById("Editeur");
     if (event.keyCode == 13) {
-        document.getElementById("Editeur").innerHTML += "\n";
+        document.getElementById("Editeur").innerHTML += "\n<span class='Numerote' />";
     }
-      if(event.keyCode == 8 ){
-         if(dir.textContent.length >= 0){
-         dir.innerHTML = formater(dir.textContent.substring(0,dir.textContent.length-1));
-         event.preventDefault();
-      }
-      else{
-         event.preventDefault();
-      }
+	if(event.keyCode == 8 ){
+		if(dir.textContent.length >= 0){
+		dir.innerHTML = formater(dir.textContent.substring(0,dir.textContent.length-1));
+		event.preventDefault();
+	}
+	else{
+		event.preventDefault();
+	}
 
    }
 }

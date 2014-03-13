@@ -8,32 +8,22 @@
     <script type="text/javascript">
         function lireUneTouche(event) {
             var contenu = document.getElementById("Editeur");
-            if (event.which != 0 && event.charCode != 0 && event.keyCode != 13) {
-                contenu.innerHTML = formater(contenu.textContent + String.fromCharCode(event.which));
-                formaterTexte();
+            switch (event.which) {
+                case 8:
+                    event.preventDefault();
+                    if (contenu.textContent.length >= 0) {
+                        contenu.innerHTML = contenu.textContent.substring(0, contenu.textContent.length - 1);
+                    }
+                    break;
+                case 13:
+                    contenu.innerHTML += "\n <span class='Numerote' />";
+                    break;
+                default:
+                    contenu.innerHTML += String.fromCharCode(event.which);
             }
         }
-        document.addEventListener('keypress', lireUneTouche);
 
-        function lireUnSpecial(event) {
-            var contenu = document.getElementById("Editeur");
-            if (event.keyCode == 13) {
-                contenu.innerHTML += "\n";
-            }
-            else if (event.keyCode == 8) {
-                event.preventDefault();
-                if (contenu.textContent.length >= 0) {
-                    contenu.innerHTML = formater(contenu.textContent.substring(0, contenu.textContent.length - 1));
-                }
-            }
-
-        }
-        document.addEventListener('keydown', lireUnSpecial);
-
-        function formaterTexte() {
-            var contenu = document.getElementById("Editeur");
-            contenu.innerHTML = formater(contenu.innerText);
-        }
+        document.addEventListener('keydown', lireUneTouche);
     </script>
     <script type="text/javascript" src="JavaScript/clavier.js"></script>
     <script type="text/javascript" src="JavaScript/algos.js"></script>
@@ -42,6 +32,7 @@
     <div>
         <h1>Formateur de texte</h1>
         <div id="Editeur" class="preformatted">
+            <span class="Numerote"></span>
         </div>
         <br />
         <div class="compteur">
