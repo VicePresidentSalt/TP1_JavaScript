@@ -156,10 +156,34 @@ var Curseur = (function () {
     };
 })();
 
-function placerCurseur() {
+function placerCurseurDebut() {
     document.getElementById("Editeur").innerHTML += Curseur.getInstance().getCaractere();
 }
+function retirerChar(char, mot) {
+    for (var i = 0; i < mot.length; ++i) {
+        if (mot[i] == char) {
+            if (i == 0) {
+                mot = mot.substring(i + 1, mot.length);
+            }
+            else if (i == mot.length - 1) {
+                mot = mot.substring(0, i);
+            }
+            else {
+                mot = mot.substring(0, i) + mot.substring(i + 1, mot.length);
+            }
+        }
+    }
+    return mot;
+}
 
+
+function ajoutCursor(s) { // sans curseur
+    var posCurseur = Curseur.getInstance().getPosition();
+    var avant = s.substring(0, posCurseur);
+    var apres = s.substring(posCurseur, s.length);
+
+    return avant + Curseur.getInstance().getCharCurseur() + apres;
+}
 function trouverLignePlusGrosse(tab){
     var plusGrosse = 0;
 
