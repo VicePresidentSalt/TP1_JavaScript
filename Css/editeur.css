@@ -7,22 +7,19 @@ div.preformatted {
 	counter-reset: line;
 }
 
-span {
-	counter-increment: line;
-}
 
 .Numerote{
 	width: 10px;
-	color: red;
+	color: black;
 	width: 10px;
-	counter-increment: line;
+	
 }
 
 .preformatted span:before {
 	color: red;
 	content: counter(line);
     border-right:solid;
-
+    counter-increment: line;
 }
 
 .preformatted {
@@ -35,6 +32,7 @@ span {
     width: 98%;
     height: 750px;
     overflow: scroll;
+    color:black;
 }
 
 table.compteur {

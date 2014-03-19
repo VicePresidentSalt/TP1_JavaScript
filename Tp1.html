@@ -12,22 +12,21 @@
                 case 8:
                     event.preventDefault();
                     if (contenu.textContent.length >= 0) {
-                        contenu.innerHTML = formater(contenu.textContent.substring(0, contenu.textContent.length - 1));
+                        contenu.innerHTML = lignifier(formater(contenu.textContent.substring(0, contenu.textContent.length - 1)));
                     }
                     break;
                 case 13:
-                    contenu.innerHTML += lignifier(formater(contenu));
+                    contenu.innerHTML += "\n";
+                    contenu.innerHTML = lignifier(formater(contenu.textContent));
                     break;
             }
         }
 
         document.addEventListener('keydown', lireUneToucheSpecial);
-        function lireUneTouche(event)
-        {
+        function lireUneTouche(event){
             var contenu = document.getElementById("Editeur");
             if (event.which != 0 && event.charCode != 0 && event.keyCode != 13) {
-                contenu.innerHTML = formater(contenu.textContent + String.fromCharCode(event.which));
-                formaterTexte();
+                contenu.innerHTML = lignifier(formater(contenu.textContent + String.fromCharCode(event.which)));
             }
         }
         document.addEventListener('keypress', lireUneTouche);
@@ -35,18 +34,18 @@
     <script type="text/javascript" src="JavaScript/clavier.js"></script>
     <script type="text/javascript" src="JavaScript/algos.js"></script>
 </head>
-<body class="prog">
+<body class="prog" onload="placerCurseur()">
     <div>
         <h1>Formateur de texte</h1>
-        <div id="Editeur" class="preformatted"><span class="Numerote"></span></div>
+        <div id="Editeur" class="preformatted"></div>
         <br />
         <div class="compteur">
             <table id="Compteur" class="compteur">
                 <tr>
-                    <td id="Mots">Mots : 0</td>
-                    <td id="Ligne">Ligne : 0</td>
-                    <td id="Colonne">Colonne : 0</td>
-                    <td id="Char">Charactères : 0</td>
+                    <td>Mots :<span id="Mots">0</span></td>
+                    <td>Ligne : <span id="Ligne"> 0</span></td>
+                    <td>Colonne :<span id="Colonne"> 0</span></td>
+                    <td>Charactères : <span id="Char" >0</span></td>
                     <td id="Curposlignes">Ligne Curseur : 0</td>
                     <td id="Curposcolonne">Colonne Curseur : 0</td>
                 </tr>

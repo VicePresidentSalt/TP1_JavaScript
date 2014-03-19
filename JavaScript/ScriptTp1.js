@@ -13,8 +13,8 @@ function keyWord( mot ) {
 
 }
 function formaterTexte() {
-   var chaine = document.getElementById("Editeur");
-   chaine.innerHTML = formater(chaine.innerText);
+   var contenu = document.getElementById("Editeur");
+   contenu.innerHTML = formater(contenu.innerText);
 }
 
 function trouverDans(val,tab) {

@@ -67,15 +67,91 @@ function trouverSi(s, pos, f) {
     return pos;
 }
 
-function lignifier(s)
-{
+function lignifier(s){
     var res = "";
-    var tab = s.split(/\r\n|\r|\n/);
+    var tab = s.split(/\n/);
 
-    for (var i = 1; i < tab.length; ++i)
+    compterLignesEtColonnes(tab);
+
+    for (var i = 0; i < tab.length-1; ++i)
     {
-        res = res + "\n<span class='Numerote' >" + e + "</span>";
+        //res = res + "\n<span class='Numerote' >" + tab[i] + "</span>";
+        res += "<span class='Numerote' >" + tab[i] + "\n</span>";
     }
+    res += "<span class='Numerote' >" + tab[tab.length-1] + "</span>";
     return res;
 }
 
+function compterLignesEtColonnes(tab){
+    document.getElementById("Ligne").innerHTML = tab.length;
+}
+
+var Compteur = (function () {
+    var instance;
+    function ZeCompteur() {
+        this.mots = 0;
+        this.ajouterMot = function () {
+            return this.mots++;
+        };
+        this.getMot = function () {
+            return this.mots;
+        }
+        this.reset = function () {
+            this.mots = 0;
+        }
+    }
+    function createInstance() {
+        var singleton = new ZeCompteur();
+        return singleton;
+    }
+    return {
+        getInstance: function () {
+            if (!instance) {
+                instance = createInstance();
+            }
+            return instance;
+        }
+    };
+})();
+
+var Curseur = (function () {
+    var instance;
+    function ZeCurseur() {
+        this.charactere = '►';
+        this.position = 0;
+        this.getPosition=function () {
+            return this.position;
+        };
+        this.getCaractere = function () {
+            return this.charactere;
+        }
+        this.gauche = function () {
+            this.position--;
+        }
+        this.droite = function () {
+            this.position++;
+        }
+        this.haute = function () {
+            this.mots = 0;
+        }
+        this.bas = function () {
+            this.mots = 0;
+        }
+    }
+    function createInstance() {
+        var singleton = new ZeCurseur();
+        return singleton;
+    }
+    return {
+        getInstance: function () {
+            if (!instance) {
+                instance = createInstance();
+            }
+            return instance;
+        }
+    };
+})();
+
+function placerCurseur() {
+    document.getElementById("Editeur").innerHTML += Curseur.getInstance().getCaractere();
+}
