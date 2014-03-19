@@ -20,7 +20,9 @@ span {
 
 .preformatted span:before {
 	color: red;
-	content: counter(line) " ";
+	content: counter(line);
+    border-right:solid;
+
 }
 
 .preformatted {

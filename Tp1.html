@@ -6,24 +6,31 @@
     <title>Tp1 Daren-ken St-laurent et Francis Coté</title>
     <link href="Css/editeur.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
-        function lireUneTouche(event) {
+        function lireUneToucheSpecial(event) {
             var contenu = document.getElementById("Editeur");
             switch (event.which) {
                 case 8:
                     event.preventDefault();
                     if (contenu.textContent.length >= 0) {
-                        contenu.innerHTML = contenu.textContent.substring(0, contenu.textContent.length - 1);
+                        contenu.innerHTML = formater(contenu.textContent.substring(0, contenu.textContent.length - 1));
                     }
                     break;
                 case 13:
-                    contenu.innerHTML += "\n <span class='Numerote' />";
+                    contenu.innerHTML += "\n<span class='Numerote' />";
                     break;
-                default:
-                    contenu.innerHTML += String.fromCharCode(event.which);
             }
         }
 
-        document.addEventListener('keydown', lireUneTouche);
+        document.addEventListener('keydown', lireUneToucheSpecial);
+        function lireUneTouche(event)
+        {
+            var contenu = document.getElementById("Editeur");
+            if (event.which != 0 && event.charCode != 0 && event.keyCode != 13) {
+                contenu.innerHTML = formater(contenu.textContent + String.fromCharCode(event.which));
+                formaterTexte();
+            }
+        }
+        document.addEventListener('keypress', lireUneTouche);
     </script>
     <script type="text/javascript" src="JavaScript/clavier.js"></script>
     <script type="text/javascript" src="JavaScript/algos.js"></script>
@@ -31,9 +38,7 @@
 <body class="prog">
     <div>
         <h1>Formateur de texte</h1>
-        <div id="Editeur" class="preformatted">
-            <span class="Numerote"></span>
-        </div>
+        <div id="Editeur" class="preformatted"><span class="Numerote"></span></div>
         <br />
         <div class="compteur">
             <table id="Compteur" class="compteur">

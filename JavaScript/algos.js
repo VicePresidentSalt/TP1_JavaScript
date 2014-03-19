@@ -67,3 +67,15 @@ function trouverSi(s, pos, f) {
     return pos;
 }
 
+function lignifier(s)
+{
+    var res = "";
+    var tab = s.split(/\r\n|\r|\n/);
+
+    for (var i = 1; i < tab.length; ++i)
+    {
+        res = res + "\n<span class='Numerote' >" + e + "</span>";
+    }
+    return res;
+}
+
