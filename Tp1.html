@@ -10,14 +10,18 @@
             var contenu = document.getElementById("Editeur");
             switch (event.which) {
                 case 8:
+                    var chaineSansCurseur = retirerChar(Curseur.getInstance().getCaractere(), contenu.textContent);
                     event.preventDefault();
-                    if (contenu.textContent.length >= 0) {
-                        contenu.innerHTML = lignifier(formater(contenu.textContent.substring(0, contenu.textContent.length - 1)));
+                    if (chaineSansCurseur.length > 0) {
+                        Curseur.getInstance().gauche();
+                        contenu.innerHTML = lignifier(formater(chaineSansCurseur.substring(0, chaineSansCurseur.length - 1) + Curseur.getInstance().getCaractere()));
                     }
                     break;
                 case 13:
                     contenu.innerHTML += "\n";
-                    contenu.innerHTML = lignifier(formater(contenu.textContent));
+                    var chaineSansCurseur = retirerChar(Curseur.getInstance().getCaractere(), contenu.textContent);
+                    Curseur.getInstance().droite();
+                    contenu.innerHTML = lignifier(formater(chaineSansCurseur + Curseur.getInstance().getCaractere()));
                     break;
             }
         }
@@ -26,7 +30,14 @@
         function lireUneTouche(event){
             var contenu = document.getElementById("Editeur");
             if (event.which != 0 && event.charCode != 0 && event.keyCode != 13) {
-                contenu.innerHTML = lignifier(formater(contenu.textContent + String.fromCharCode(event.which)));
+                var curPosition = Curseur.getInstance().getPosition();
+                var chaineSansCurseur = retirerChar(Curseur.getInstance().getCaractere(), contenu.textContent); // on retire le curseur
+
+                chaineSansCurseur = chaineSansCurseur.substring(0, curPosition) + String.fromCharCode(event.which) + chaineSansCurseur.substring(curPosition, chaineSansCurseur.length);
+
+                Curseur.getInstance().droite();
+
+                contenu.innerHTML = lignifier(formater(chaineSansCurseur + Curseur.getInstance().getCaractere()));
             }
         }
         document.addEventListener('keypress', lireUneTouche);
