@@ -22,6 +22,7 @@ function trouverDans(val, tab) {
 }
 
 function formater(s) {
+    Compteur.getInstance().reset();
     var temp = "";
     var result = "";
     var pos = 0;
@@ -32,6 +33,7 @@ function formater(s) {
         if (pos != s.length) {
             prochain = trouverSi(s, pos, isSpace);
             temp = subStr(s, pos, prochain);
+            Compteur.getInstance().ajouterMot();
             if (keyWord(temp)) {
                 temp = "<strong>" + temp + "</strong>";
             }
@@ -39,6 +41,7 @@ function formater(s) {
             result += temp;
         }
     }
+    document.getElementById("Mots").innerHTML = Compteur.getInstance().getMot();
     return result;
 }
 
@@ -160,10 +163,10 @@ function placerCurseur() {
 function trouverLignePlusGrosse(tab){
     var plusGrosse = 0;
 
-    for(var i;i=0;++i){
+    for(var i=0;i<tab.length;++i){
         if (plusGrosse < tab[i].length)
             plusGrosse = tab[i].length;
     }
-    return plusGrosse;c
+    return plusGrosse;
 
 }
