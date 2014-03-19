@@ -84,6 +84,7 @@ function lignifier(s){
 
 function compterLignesEtColonnes(tab){
     document.getElementById("Ligne").innerHTML = tab.length;
+    document.getElementById("Colonne").innerHTML = trouverLignePlusGrosse(tab);
 }
 
 var Compteur = (function () {
@@ -154,4 +155,15 @@ var Curseur = (function () {
 
 function placerCurseur() {
     document.getElementById("Editeur").innerHTML += Curseur.getInstance().getCaractere();
+}
+
+function trouverLignePlusGrosse(tab){
+    var plusGrosse = 0;
+
+    for(var i;i=0;++i){
+        if (plusGrosse < tab[i].length)
+            plusGrosse = tab[i].length;
+    }
+    return plusGrosse;c
+
 }
