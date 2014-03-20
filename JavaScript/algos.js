@@ -192,7 +192,7 @@ function ajoutCursor(s) { // sans curseur
     var avant = s.substring(0, posCurseur);
     var apres = s.substring(posCurseur, s.length);
 
-    return avant + Curseur.getInstance().getCharCurseur() + apres;
+    return avant + Curseur.getInstance().getCaractere() + apres;
 }
 function trouverLignePlusGrosse(tab){
     var plusGrosse = 0;
