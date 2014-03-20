@@ -12,27 +12,28 @@
             switch (event.which) {
                 case 8:
                     event.preventDefault();
-                    if (chaineSansCurseur.length > 0 && Curseur.getInstance().getPosition > 0) {
+                    if (chaineSansCurseur.length > 0 && Curseur.getInstance().getPosition() > 0) {
+                        chaineSansCurseur = retirerLettre(chaineSansCurseur, Curseur.getInstance().getPosition()); 
                         decrementeChar();
                         Curseur.getInstance().gauche();
-                        contenu.innerHTML = lignifier(formater(chaineSansCurseur.substring(0, chaineSansCurseur.length - 1)));
+                        contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
                     }
                     break;
                 case 13:
-                    chaineSansCurseur = ajoutstring(chaineSansCurseur, "\n");
+                    chaineSansCurseur = ajoutstring(chaineSansCurseur, "\n",Curseur.getInstance().getPosition());
                     Curseur.getInstance().droite();
-                    contenu.innerHTML = lignifier(formater(ajoutCursor(chaineSansCurseur))); 
+                    contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur))); 
                     break;
                 case 37: // gauche
                     if (Curseur.getInstance().getPosition() > 0 && contenu.textContent.length > 0) {
                         Curseur.getInstance().gauche();
-                        contenu.innerHTML = lignifier(formater(ajoutCursor(chaineSansCurseur))); 
+                        contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur))); 
                     }
                     break;
                 case 39: //droite
                     if (Curseur.getInstance().getPosition() < contenu.textContent.length-1 && contenu.textContent.length > 0) {
                         Curseur.getInstance().droite();
-                        contenu.innerHTML = lignifier(formater(ajoutCursor(chaineSansCurseur)));
+                        contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
                     }
                     break;
                 case 40://down
@@ -54,7 +55,7 @@
                 chaineSansCurseur = chaineSansCurseur.substring(0, curPosition) + String.fromCharCode(event.which) + chaineSansCurseur.substring(curPosition, chaineSansCurseur.length);
                 compteurChar(contenu.textContent); // Compteur de char ++
                 Curseur.getInstance().droite();
-                contenu.innerHTML = lignifier(formater(ajoutCursor(chaineSansCurseur)));
+                contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
             }
         }
         document.addEventListener('keypress', lireUneTouche);

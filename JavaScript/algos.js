@@ -185,20 +185,26 @@ function retirerChar(char, mot) {
     return mot;
 }
 
-function ajoutstring(s,string) {
-    var posCurseur = Curseur.getInstance().getPosition();
-    var avant = s.substring(0, posCurseur);
-    var apres = s.substring(posCurseur, s.length);
+function ajoutstring(s,string,position) {
+    
+    var avant = s.substring(0, position);
+    var apres = s.substring(position, s.length);
 
     return avant + string + apres;
 }
 
-function ajoutCursor(s) {
+function ajouterCurseur(s) {
     var posCurseur = Curseur.getInstance().getPosition();
     var avant = s.substring(0, posCurseur);
     var apres = s.substring(posCurseur, s.length);
 
     return avant + Curseur.getInstance().getCaractere() + apres;
+}
+function retirerLettre(s, position) {
+    var avant = s.substring(0, position - 1);
+    var apres = s.substring(position, s.length);
+
+    return avant + apres;
 }
 function trouverLignePlusGrosse(tab){
     var plusGrosse = 0;
