@@ -241,5 +241,5 @@ function TrouverPosCurseur(s){
 }
 
 function calculerNouvellePos(posLigne, posTab, deplacement) {
-    if()
+   // if()
 }

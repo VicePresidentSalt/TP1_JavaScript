@@ -20,7 +20,8 @@
                     }
                     break;
                 case 13:
-                    chaineSansCurseur = ajoutstring(chaineSansCurseur, "\n",Curseur.getInstance().getPosition());
+                    chaineSansCurseur = ajoutstring(chaineSansCurseur, "\n", Curseur.getInstance().getPosition());
+                    compteurChar(contenu.textContent + 1);
                     Curseur.getInstance().droite();
                     contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur))); 
                     break;
