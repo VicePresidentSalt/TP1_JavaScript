@@ -9,39 +9,48 @@
         function lireUneToucheSpecial(event) {
             var contenu = document.getElementById("Editeur");
             var chaineSansCurseur = retirerChar(Curseur.getInstance().getCaractere(), contenu.textContent);
+            var posCur = Curseur.getInstance().getPosition();
             switch (event.which) {
-                case 8:
+                case 8://BS
                     event.preventDefault();
-                    if (chaineSansCurseur.length > 0 && Curseur.getInstance().getPosition() > 0) {
+                    if (chaineSansCurseur.length > 0 && posCur > 0) {
                         chaineSansCurseur = retirerLettre(chaineSansCurseur, Curseur.getInstance().getPosition()); 
                         decrementeChar();
                         Curseur.getInstance().gauche();
                         contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
                     }
                     break;
-                case 13:
-                    chaineSansCurseur = ajoutstring(chaineSansCurseur, "\n", Curseur.getInstance().getPosition());
+                case 13://enter
+
+                    chaineSansCurseur = ajoutstring(chaineSansCurseur, "\n",posCur);
                     compteurChar(contenu.textContent + 1);
                     Curseur.getInstance().droite();
                     contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur))); 
                     break;
                 case 37: // gauche
-                    if (Curseur.getInstance().getPosition() > 0 && contenu.textContent.length > 0) {
+                    if (posCur > 0 && contenu.textContent.length > 0) {
                         Curseur.getInstance().gauche();
                         contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur))); 
                     }
                     break;
                 case 39: //droite
-                    if (Curseur.getInstance().getPosition() < contenu.textContent.length-1 && contenu.textContent.length > 0) {
+                    if (posCur < contenu.textContent.length-1 && contenu.textContent.length > 0) {
                         Curseur.getInstance().droite();
                         contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
                     }
                     break;
                 case 40://down
-                    //TrouverPosCurseur(contenu.textContent);
-                    break;
+                    if (posCur <contenu.textContent.length) {
+                        Curseur.getInstance().bas(TrouverPosCurseur(contenu.textContent, "bas"));
+                        contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
+                    }
+                        
+                    break
                 case 38://up
-
+                    if (posCur > 0) {
+                        Curseur.getInstance().haute(TrouverPosCurseur(contenu.textContent, "haut"));
+                        contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
+                    }
                     break;
             }
         }

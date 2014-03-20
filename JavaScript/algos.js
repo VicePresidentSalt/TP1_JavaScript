@@ -144,11 +144,15 @@ var Curseur = (function () {
         this.droite = function () {
             this.position++;
         }
-        this.haute = function () {
-            this.mots = 0;
+        this.haute = function (pos) {
+            if (pos < this.position) {
+                this.position = pos;
+            }
         }
-        this.bas = function () {
-            this.mots = 0;
+        this.bas = function (pos) {
+            if (pos > this.position) {
+                this.position = pos;
+            }
         }
     }
     function createInstance() {
@@ -224,7 +228,7 @@ function decrementeChar() {
     document.getElementById("Char").innerHTML = document.getElementById("Char").textContent-1;
 }
 
-function TrouverPosCurseur(s){
+function TrouverPosCurseur(s,direction){
     var tab = s.split(/\n/);
     var posLigne = -1;
     var posTab = -1;
@@ -236,10 +240,40 @@ function TrouverPosCurseur(s){
             posTab = i;
         }
     }
-    
-    return new Array(posLigne, posTab);
+    var res = 0;
+    if (direction == "haut") {
+        
+        if (posTab != 0) {
+            for (var i = 0; i < posTab - 1; ++i) {
+                res += tab[i].length + 1; // calcule la valeur + 1 car on considere ici que c'est une ligne sans \n ou il devraient y en avoir une
+            }
+            if (tab[posTab - 1].length <= posLigne) {
+                res += tab[posTab - 1].length;
+            }
+            else {
+                res += posLigne;
+            }
+        }
+
+    }
+    else if (direction == "bas") {
+        if (posTab != tab.length-1) {// si pas sur la derniere ligne {
+            for (var i = 0; i <= posTab; ++i) {
+                res += tab[i].length + 1; // calcule la valeur + 1 car on considere ici que c'est une ligne sans \n ou il devraient y en avoir une
+            }
+            res--; // on a calculer le curseur on le retire
+            if (tab[posTab + 1].length <= posLigne) {
+                res += tab[posTab + 1].length;
+            }
+            else {
+                res += posLigne;
+            }
+        }
+    }
+
+    return res;
 }
 
-function calculerNouvellePos(posLigne, posTab, deplacement) {
-   // if()
+function calculerNouvellePos(posLigne, posTab, direction) {
+
 }
