@@ -19,10 +19,9 @@
                     }
                     break;
                 case 13:
-                    //appeller textcontent , pi le /n 
-                    contenu.innerHTML += "\n";
+                    chaineSansCurseur = ajoutstring(chaineSansCurseur, "\n");
                     Curseur.getInstance().droite();
-                    contenu.innerHTML = lignifier(formater(chaineSansCurseur + Curseur.getInstance().getCaractere()));
+                    contenu.innerHTML = lignifier(formater(ajoutCursor(chaineSansCurseur)));
                     break;
                 case 37: // gauche
                     if (Curseur.getInstance().getPosition() > 0 && contenu.textContent.length > 0) {
@@ -52,7 +51,7 @@
                 var chaineSansCurseur = retirerChar(Curseur.getInstance().getCaractere(), contenu.textContent); // on retire le curseur
 
                 chaineSansCurseur = chaineSansCurseur.substring(0, curPosition) + String.fromCharCode(event.which) + chaineSansCurseur.substring(curPosition, chaineSansCurseur.length);
-                compteurChar(contenu.textContent);
+                compteurChar(contenu.textContent); // Compteur de char ++
                 Curseur.getInstance().droite();
                 contenu.innerHTML = lignifier(formater(ajoutCursor(chaineSansCurseur)));
             }
