@@ -13,6 +13,7 @@
                     var chaineSansCurseur = retirerChar(Curseur.getInstance().getCaractere(), contenu.textContent);
                     event.preventDefault();
                     if (chaineSansCurseur.length > 0) {
+                        decrementeChar();
                         Curseur.getInstance().gauche();
                         contenu.innerHTML = lignifier(formater(chaineSansCurseur.substring(0, chaineSansCurseur.length - 1) + Curseur.getInstance().getCaractere()));
                     }
@@ -34,9 +35,8 @@
                 var chaineSansCurseur = retirerChar(Curseur.getInstance().getCaractere(), contenu.textContent); // on retire le curseur
 
                 chaineSansCurseur = chaineSansCurseur.substring(0, curPosition) + String.fromCharCode(event.which) + chaineSansCurseur.substring(curPosition, chaineSansCurseur.length);
-
+                compteurChar(contenu.textContent);
                 Curseur.getInstance().droite();
-
                 contenu.innerHTML = lignifier(formater(chaineSansCurseur + Curseur.getInstance().getCaractere()));
             }
         }

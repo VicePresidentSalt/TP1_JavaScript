@@ -30,12 +30,13 @@ function formater(s) {
         var prochain = trouverSi(s, pos, négation(isSpace));
         result += subStr(s, pos, prochain);
         pos = prochain;
+        
         if (pos != s.length) {
             prochain = trouverSi(s, pos, isSpace);
             temp = subStr(s, pos, prochain);
-            Compteur.getInstance().ajouterMot();
+            Compteur.getInstance().ajouterMot(); // Compteur de mots
             if (keyWord(temp)) {
-                temp = "<strong>" + temp + "</strong>";
+                temp = "<strong>" + temp + "</strong>"; // Peinture le mot clé
             }
             pos = prochain;
             result += temp;
@@ -86,23 +87,32 @@ function lignifier(s){
 }
 
 function compterLignesEtColonnes(tab){
-    document.getElementById("Ligne").innerHTML = tab.length;
-    document.getElementById("Colonne").innerHTML = trouverLignePlusGrosse(tab);
+    document.getElementById("Ligne").innerHTML = tab.length; // Compteur de lignes
+    document.getElementById("Colonne").innerHTML = trouverLignePlusGrosse(tab); // Compteur de colonnes+
 }
 
 var Compteur = (function () {
     var instance;
     function ZeCompteur() {
         this.mots = 0;
+        this.char = 0;
+        this.ajouterChar = function () {
+            return this.char++;
+        }
+        this.getChar = function () {
+            this.char;
+        }
         this.ajouterMot = function () {
             return this.mots++;
-        };
+        }
         this.getMot = function () {
             return this.mots;
         }
         this.reset = function () {
             this.mots = 0;
+            this.char = 0;
         }
+        
     }
     function createInstance() {
         var singleton = new ZeCompteur();
@@ -194,3 +204,11 @@ function trouverLignePlusGrosse(tab){
     return plusGrosse;
 
 }
+
+function compteurChar(contenu) {
+    document.getElementById("Char").innerHTML = contenu.length;
+}
+function decrementeChar() {
+    document.getElementById("Char").innerHTML = document.getElementById("Char").textContent-1;
+}
+
