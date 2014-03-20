@@ -21,7 +21,7 @@
                 case 13:
                     chaineSansCurseur = ajoutstring(chaineSansCurseur, "\n");
                     Curseur.getInstance().droite();
-                    contenu.innerHTML = lignifier(formater(ajoutCursor(chaineSansCurseur)));
+                    contenu.innerHTML = lignifier(formater(ajoutCursor(chaineSansCurseur))); 
                     break;
                 case 37: // gauche
                     if (Curseur.getInstance().getPosition() > 0 && contenu.textContent.length > 0) {
