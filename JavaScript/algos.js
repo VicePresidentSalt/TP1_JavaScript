@@ -186,8 +186,14 @@ function retirerChar(char, mot) {
     return mot;
 }
 
+function ajoutstring(s,string) {
+    var avant = s.substring(0, posCurseur);
+    var apres = s.substring(posCurseur, s.length);
 
-function ajoutCursor(s) { // sans curseur
+    return avant + string + apres;
+}
+
+function ajoutCursor(s) {
     var posCurseur = Curseur.getInstance().getPosition();
     var avant = s.substring(0, posCurseur);
     var apres = s.substring(posCurseur, s.length);
