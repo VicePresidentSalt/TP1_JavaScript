@@ -77,8 +77,7 @@ function lignifier(s){
 
     compterLignesEtColonnes(tab);
 
-    for (var i = 0; i < tab.length-1; ++i)
-    {
+    for (var i = 0; i < tab.length-1; ++i){
         //res = res + "\n<span class='Numerote' >" + tab[i] + "</span>";
         res += "<span class='Numerote' >" + tab[i] + "\n</span>";
     }
@@ -219,3 +218,22 @@ function decrementeChar() {
     document.getElementById("Char").innerHTML = document.getElementById("Char").textContent-1;
 }
 
+function TrouverPosCurseur(s){
+    var tab = s.split(/\n/);
+    var posLigne = -1;
+    var posTab = -1;
+
+    for (var i = 0; i < tab.length; ++i) {
+        var pos = tab[i].search(Curseur.getInstance().getCaractere());
+        if(pos != -1){
+            posLigne = pos;
+            posTab = i;
+        }
+    }
+    
+    return new Array(posLigne, posTab);
+}
+
+function calculerNouvellePos(posLigne, posTab, deplacement) {
+    if()
+}
