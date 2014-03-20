@@ -21,6 +21,24 @@ function trouverDans(val, tab) {
     }
 }
 
+// Cette fonction vérifie si le string (s) contient un char spécifique (c) et le retire entierement de la chaine.
+function retirerChar(char, mot) {
+    for (var i = 0; i < mot.length; ++i) {
+        if (mot[i] == char) {
+            if (i == 0) {
+                mot = mot.substring(i + 1, mot.length);
+            }
+            else if (i == mot.length - 1) {
+                mot = mot.substring(0, i);
+            }
+            else {
+                mot = mot.substring(0, i) + mot.substring(i + 1, mot.length);
+            }
+        }
+    }
+    return mot;
+}
+
 function formater(s) {
     Compteur.getInstance().reset();
     var temp = "";
@@ -35,7 +53,7 @@ function formater(s) {
             prochain = trouverSi(s, pos, isSpace);
             temp = subStr(s, pos, prochain);
             Compteur.getInstance().ajouterMot(); // Compteur de mots
-            if (keyWord(temp)) {
+            if (keyWord(retirerChar(Curseur.getInstance().getCaractere(),temp))) {
                 temp = "<strong>" + temp + "</strong>"; // Peinture le mot clé
             }
             pos = prochain;
