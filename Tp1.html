@@ -19,6 +19,7 @@
                     }
                     break;
                 case 13:
+                    //appeller textcontent , pi le /n 
                     contenu.innerHTML += "\n";
                     Curseur.getInstance().droite();
                     contenu.innerHTML = lignifier(formater(chaineSansCurseur + Curseur.getInstance().getCaractere()));
