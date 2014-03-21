@@ -144,7 +144,7 @@ var Curseur = (function () {
             this.position++;
         }
         this.haut = function (pos) {
-            if (pos < this.position && pos >=0) {
+            if (pos < this.position && pos >= 0) {
                 this.position = pos;
             }
         }

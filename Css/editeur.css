@@ -1,28 +1,28 @@
 ﻿/* CSS source code
    par Francis cote et daren-ken st-laurent
-*/ 
+*/
 .prog {
     background-color: #3CF;
 }
 
 div.preformatted {
-	counter-reset: line;
+    counter-reset: line;
 }
 
 
-.Numerote{
-	height: 10px;
-	color: black;	
+.Numerote {
+    height: 10px;
+    color: black;
 }
 
 .preformatted span:before {
-	color: red;
-	content: counter(line);
-    border-right:solid;
+    color: red;
+    content: counter(line);
+    border-right: solid;
     counter-increment: line;
-    width:3em;
-    text-align:right;
-    display:inline-block;
+    width: 3em;
+    text-align: right;
+    display: inline-block;
 }
 
 .preformatted {
@@ -35,7 +35,7 @@ div.preformatted {
     width: 98%;
     height: 750px;
     overflow: scroll;
-    color:black;
+    color: black;
 }
 
 table.compteur {
@@ -50,5 +50,5 @@ table.compteur {
 }
 
 td {
-	border: 1px solid #000;
+    border: 1px solid #000;
 }
