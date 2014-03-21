@@ -14,7 +14,7 @@
                 case 8://BS
                     event.preventDefault();
                     if (chaineSansCurseur.length > 0 && posCur > 0) {
-                        chaineSansCurseur = retirerLettre(chaineSansCurseur, Curseur.getInstance().getPosition()); 
+                        chaineSansCurseur = retirerLettre(chaineSansCurseur, Curseur.getInstance().getPosition());
                         decrementeChar();
                         Curseur.getInstance().gauche();
                         contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
@@ -22,29 +22,29 @@
                     break;
                 case 13://enter
 
-                    chaineSansCurseur = ajoutstring(chaineSansCurseur, "\n",posCur);
+                    chaineSansCurseur = ajoutstring(chaineSansCurseur, "\n", posCur);
                     compteurChar(contenu.textContent + 1);
                     Curseur.getInstance().droite();
-                    contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur))); 
+                    contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
                     break;
                 case 37: // gauche
                     if (posCur > 0 && contenu.textContent.length > 0) {
                         Curseur.getInstance().gauche();
-                        contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur))); 
+                        contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
                     }
                     break;
                 case 39: //droite
-                    if (posCur < contenu.textContent.length-1 && contenu.textContent.length > 0) {
+                    if (posCur < contenu.textContent.length - 1 && contenu.textContent.length > 0) {
                         Curseur.getInstance().droite();
                         contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
                     }
                     break;
                 case 40://down
-                    if (posCur <contenu.textContent.length) {
+                    if (posCur < contenu.textContent.length) {
                         Curseur.getInstance().bas(TrouverPosCurseur(contenu.textContent, "bas"));
                         contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
                     }
-                        
+
                     break
                 case 38://up
                     if (posCur > 0) {
@@ -56,7 +56,7 @@
         }
 
         document.addEventListener('keydown', lireUneToucheSpecial);
-        function lireUneTouche(event){
+        function lireUneTouche(event) {
             var contenu = document.getElementById("Editeur");
             if (event.which != 0 && event.charCode != 0 && event.keyCode != 13) {
                 var curPosition = Curseur.getInstance().getPosition();
@@ -82,9 +82,9 @@
             <table id="Compteur" class="compteur">
                 <tr>
                     <td>Mots :<span id="Mots">0</span></td>
-                    <td>Ligne : <span id="Ligne"> 0</span></td>
+                    <td>Ligne : <span id="Ligne">0</span></td>
                     <td>Colonne :<span id="Colonne"> 0</span></td>
-                    <td>Charactères : <span id="Char" >0</span></td>
+                    <td>Charactères : <span id="Char">0</span></td>
                     <td id="Curposlignes">Ligne Curseur : 0</td>
                     <td id="Curposcolonne">Colonne Curseur : 0</td>
                 </tr>

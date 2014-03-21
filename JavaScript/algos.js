@@ -48,12 +48,12 @@ function formater(s) {
         var prochain = trouverSi(s, pos, négation(isSpace));
         result += subStr(s, pos, prochain);
         pos = prochain;
-        
+
         if (pos != s.length) {
             prochain = trouverSi(s, pos, isSpace);
             temp = subStr(s, pos, prochain);
             Compteur.getInstance().ajouterMot(); // Compteur de mots
-            if (keyWord(retirerChar(Curseur.getInstance().getCaractere(),temp))) {
+            if (keyWord(retirerChar(Curseur.getInstance().getCaractere(), temp))) {
                 temp = "<strong>" + temp + "</strong>"; // Peinture le mot clé
             }
             pos = prochain;
@@ -89,21 +89,21 @@ function trouverSi(s, pos, f) {
     return pos;
 }
 
-function lignifier(s){
+function lignifier(s) {
     var res = "";
     var tab = s.split(/\n/);
 
     compterLignesEtColonnes(tab);
 
-    for (var i = 0; i < tab.length-1; ++i){
+    for (var i = 0; i < tab.length - 1; ++i) {
         //res = res + "\n<span class='Numerote' >" + tab[i] + "</span>";
         res += "<span class='Numerote' >" + tab[i] + "\n</span>";
     }
-    res += "<span class='Numerote' >" + tab[tab.length-1] + "</span>";
+    res += "<span class='Numerote' >" + tab[tab.length - 1] + "</span>";
     return res;
 }
 
-function compterLignesEtColonnes(tab){
+function compterLignesEtColonnes(tab) {
     document.getElementById("Ligne").innerHTML = tab.length; // Compteur de lignes
     document.getElementById("Colonne").innerHTML = trouverLignePlusGrosse(tab); // Compteur de colonnes+
 }
@@ -129,7 +129,7 @@ var Compteur = (function () {
             this.mots = 0;
             this.char = 0;
         }
-        
+
     }
     function createInstance() {
         var singleton = new ZeCompteur();
@@ -150,7 +150,7 @@ var Curseur = (function () {
     function ZeCurseur() {
         this.charactere = '►';
         this.position = 0;
-        this.getPosition=function () {
+        this.getPosition = function () {
             return this.position;
         };
         this.getCaractere = function () {
@@ -207,8 +207,8 @@ function retirerChar(char, mot) {
     return mot;
 }
 
-function ajoutstring(s,string,position) {
-    
+function ajoutstring(s, string, position) {
+
     var avant = s.substring(0, position);
     var apres = s.substring(position, s.length);
 
@@ -228,10 +228,10 @@ function retirerLettre(s, position) {
 
     return avant + apres;
 }
-function trouverLignePlusGrosse(tab){
+function trouverLignePlusGrosse(tab) {
     var plusGrosse = 0;
 
-    for(var i=0;i<tab.length;++i){
+    for (var i = 0; i < tab.length; ++i) {
         if (plusGrosse < tab[i].length)
             plusGrosse = tab[i].length;
     }
@@ -243,24 +243,24 @@ function compteurChar(contenu) {
     document.getElementById("Char").innerHTML = contenu.length;
 }
 function decrementeChar() {
-    document.getElementById("Char").innerHTML = document.getElementById("Char").textContent-1;
+    document.getElementById("Char").innerHTML = document.getElementById("Char").textContent - 1;
 }
 
-function TrouverPosCurseur(s,direction){
+function TrouverPosCurseur(s, direction) {
     var tab = s.split(/\n/);
     var posLigne = -1;
     var posTab = -1;
 
     for (var i = 0; i < tab.length; ++i) {
         var pos = tab[i].search(Curseur.getInstance().getCaractere());
-        if(pos != -1){
+        if (pos != -1) {
             posLigne = pos;
             posTab = i;
         }
     }
     var res = 0;
     if (direction == "haut") {
-        
+
         if (posTab != 0) {
             for (var i = 0; i < posTab - 1; ++i) {
                 res += tab[i].length + 1; // calcule la valeur + 1 car on considere ici que c'est une ligne sans \n ou il devraient y en avoir une
@@ -275,7 +275,7 @@ function TrouverPosCurseur(s,direction){
 
     }
     else if (direction == "bas") {
-        if (posTab != tab.length-1) {// si pas sur la derniere ligne {
+        if (posTab != tab.length - 1) {// si pas sur la derniere ligne {
             for (var i = 0; i <= posTab; ++i) {
                 res += tab[i].length + 1; // calcule la valeur + 1 car on considere ici que c'est une ligne sans \n ou il devraient y en avoir une
             }
