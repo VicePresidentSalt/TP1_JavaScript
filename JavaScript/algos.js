@@ -162,7 +162,7 @@ var Curseur = (function () {
             this.position++;
         }
         this.haut = function (pos) {
-            if (pos < this.position) {
+            if (pos < this.position && pos >=0) {
                 this.position = pos;
             }
         }
@@ -221,12 +221,7 @@ function ajouterCurseur(s) {
 
     return avant + Curseur.getInstance().getCaractere() + apres;
 }
-function retirerLettre(s, position) {
-    var avant = s.substring(0, position - 1);
-    var apres = s.substring(position, s.length);
 
-    return avant + apres;
-}
 function trouverLignePlusGrosse(tab) {
     var plusGrosse = 0;
 

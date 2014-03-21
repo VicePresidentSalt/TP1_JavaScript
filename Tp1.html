@@ -15,14 +15,13 @@
                 case 8://BS
                     event.preventDefault();
                     if (chaineSansCurseur.length > 0 && posCur > 0) {
-                        chaineSansCurseur = retirerLettre(chaineSansCurseur, Curseur.getInstance().getPosition());
+                        chaineSansCurseur = retirerLettreAvant(chaineSansCurseur, posCur);
                         decrementeChar();
                         Curseur.getInstance().gauche();
                         contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
                     }
                     break;
                 case 13://enter
-
                     chaineSansCurseur = ajoutstring(chaineSansCurseur, "\n", posCur);
                     compteurChar(contenu.textContent + 1);
                     Curseur.getInstance().droite();
@@ -49,6 +48,13 @@
                 case 38://up
                     if (posCur > 0) {
                         Curseur.getInstance().haut(TrouverPosCurseur(contenu.textContent, 'h'));
+                        contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
+                    }
+                    break;
+                case 46://delete
+                    if (posCur < chaineSansCurseur.length) {
+                        chaineSansCurseur = retirerLettreApres(chaineSansCurseur,posCur);
+                        decrementeChar();
                         contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
                     }
                     break;
