@@ -161,7 +161,7 @@ var Curseur = (function () {
         this.droite = function () {
             this.position++;
         }
-        this.haute = function (pos) {
+        this.haut = function (pos) {
             if (pos < this.position) {
                 this.position = pos;
             }
@@ -258,7 +258,7 @@ function TrouverPosCurseur(s, direction) {
         }
     }
     var res = 0;
-    if (direction == "haut") {
+    if (direction == 'h') {
 
         if (posTab != 0) {
             for (var i = 0; i < posTab - 1; ++i) { // si pas sur la premiere ligne
@@ -272,7 +272,7 @@ function TrouverPosCurseur(s, direction) {
             }
         }
     }
-    else if (direction == "bas") {
+    else if (direction == 'b') {
         if (posTab != tab.length - 1) {// si pas sur la derniere ligne 
             for (var i = 0; i <= posTab; ++i) {
                 res += tab[i].length + 1; // calcule la valeur + 1 car on considere ici que c'est une ligne sans \n ou il devraient y en avoir une
