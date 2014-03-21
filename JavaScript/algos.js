@@ -102,10 +102,7 @@ function lignifier(s) {
     return res;
 }
 
-function compterLignesEtColonnes(tab) {
-    document.getElementById("Ligne").innerHTML = tab.length; // Compteur de lignes
-    document.getElementById("Colonne").innerHTML = trouverLignePlusGrosse(tab); // Compteur de colonnes+
-}
+
 
 var Compteur = (function () {
     var instance;
@@ -186,9 +183,6 @@ var Curseur = (function () {
     };
 })();
 
-function placerCurseurDebut() {
-    document.getElementById("Editeur").innerHTML += Curseur.getInstance().getCaractere();
-}
 function retirerChar(char, mot) {
     for (var i = 0; i < mot.length; ++i) {
         if (mot[i] == char) {

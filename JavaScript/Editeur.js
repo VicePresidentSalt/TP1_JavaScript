@@ -7,3 +7,7 @@ function decrementeChar() {
 function placerCurseurDebut() {
     document.getElementById("Editeur").innerHTML += Curseur.getInstance().getCaractere();
 }
+function compterLignesEtColonnes(tab) {
+    document.getElementById("Ligne").innerHTML = tab.length; // Compteur de lignes
+    document.getElementById("Colonne").innerHTML = trouverLignePlusGrosse(tab); // Compteur de colonnes+
+}
