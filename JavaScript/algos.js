@@ -233,13 +233,6 @@ function trouverLignePlusGrosse(tab) {
 
 }
 
-function compteurChar(contenu) {
-    document.getElementById("Char").innerHTML = contenu.length;
-}
-function decrementeChar() {
-    document.getElementById("Char").innerHTML = document.getElementById("Char").textContent - 1;
-}
-
 function TrouverPosCurseur(s, direction) {
     var tab = s.split(/\n/);
     var posLigne = -1;
