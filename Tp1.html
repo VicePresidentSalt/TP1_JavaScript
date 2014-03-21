@@ -9,78 +9,9 @@
     <title>Tp1 Daren-ken St-laurent et Francis Coté</title>
     <link href="Css/editeur.css" rel="stylesheet" type="text/css" />
     
-    <script type="text/javascript"> //contient les methodes propre a ce fichier HTML
-        function lireUneToucheSpecial(event) {
-            var contenu = document.getElementById("Editeur");
-            var chaineSansCurseur = retirerChar(Curseur.getInstance().getCaractere(), contenu.textContent);
-            var posCur = Curseur.getInstance().getPosition();
-            switch (event.which) {
-                case 8://Backspace
-                    event.preventDefault();
-                    if (chaineSansCurseur.length > 0 && posCur > 0) {
-                        chaineSansCurseur = retirerLettreAvant(chaineSansCurseur, posCur); // Retire lettre
-                        decrementeChar(); // Décrémente le nombre de char à l'effacement
-                        Curseur.getInstance().gauche();
-                        contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
-                    }
-                    break;
-                case 13://enter
-                    chaineSansCurseur = ajoutstring(chaineSansCurseur, "\n", posCur);
-                    compteurChar(contenu.textContent + 1);
-                    Curseur.getInstance().droite();
-                    contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
-                    break;
-                case 37: // gauche
-                    if (posCur > 0 && contenu.textContent.length > 0) {
-                        Curseur.getInstance().gauche();
-                        contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur))); // Mettre le curseur à gauche de la position précédente
-                    }
-                    break;
-                case 39: //droite
-                    if (posCur < contenu.textContent.length - 1 && contenu.textContent.length > 0) {
-                        Curseur.getInstance().droite();
-                        contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur))); // Mettre le curseur à droite de la position précédente
-                    }
-                    break;
-                case 40://down
-                    if (posCur < contenu.textContent.length) {
-                        Curseur.getInstance().bas(TrouverPosCurseur(contenu.textContent, 'b')); 
-                        contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur))); // Mettre le curseur en bas de la position précédente
-                    }
-                    break
-                case 38://up
-                    if (posCur > 0) {
-                        Curseur.getInstance().haut(TrouverPosCurseur(contenu.textContent, 'h'));
-                        contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur))); // Mettre le curseur en haut de la position précédente
-                    }
-                    break;
-                case 46://delete
-                    if (posCur < chaineSansCurseur.length) {
-                        chaineSansCurseur = retirerLettreApres(chaineSansCurseur,posCur); // Retire la lettre a droite du curseur
-                        decrementeChar(); // Compteur de char --
-                        contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
-                    }
-                    break;
-            }
-        }
-
-        document.addEventListener('keydown', lireUneToucheSpecial);
-        function lireUneTouche(event) {
-            var contenu = document.getElementById("Editeur");
-            if (event.which != 0 && event.charCode != 0 && event.keyCode != 13) {
-                var curPosition = Curseur.getInstance().getPosition();
-                var chaineSansCurseur = retirerChar(Curseur.getInstance().getCaractere(), contenu.textContent); // on retire le curseur
-
-                chaineSansCurseur = ajoutstring(chaineSansCurseur, String.fromCharCode(event.which), curPosition)//ajout de la touche a la chaine
-                compteurChar(contenu.textContent); // Compteur de char ++
-                Curseur.getInstance().droite();
-                contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
-            }
-        }
-        document.addEventListener('keypress', lireUneTouche);
-    </script>
-    <script type="text/javascript" src="JavaScript/clavier.js">//alogrythmes touchant au clavier</script>
-    <script type="text/javascript" src="JavaScript/algos.js">//Algorysthmes generaux utiliser</script>
+    <script type="text/javascript" src="JavaScript/Editeur.js"></script><!--//Algogrythmes propre a cette page html-->
+    <script type="text/javascript" src="JavaScript/clavier.js"></script><!--//Algogrythmes touchant au clavier-->
+    <script type="text/javascript" src="JavaScript/algos.js"></script><!--//Algorysthmes generaux utiliser-->
 </head>
 <body class="prog" onload="placerCurseurDebut()">
     <div>

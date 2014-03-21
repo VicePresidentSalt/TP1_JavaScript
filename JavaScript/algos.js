@@ -89,21 +89,6 @@ function trouverSi(s, pos, f) {
     return pos;
 }
 
-function lignifier(s) {
-    var res = "";
-    var tab = s.split(/\n/);
-
-    compterLignesEtColonnes(tab);
-
-    for (var i = 0; i < tab.length - 1; ++i) {
-        res += "<span class='Numerote' >" + tab[i] + "\n</span>";
-    }
-    res += "<span class='Numerote' >" + tab[tab.length - 1] + "</span>";
-    return res;
-}
-
-
-
 var Compteur = (function () {
     var instance;
     function ZeCompteur() {
