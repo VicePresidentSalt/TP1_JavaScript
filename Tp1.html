@@ -12,11 +12,11 @@
             var chaineSansCurseur = retirerChar(Curseur.getInstance().getCaractere(), contenu.textContent);
             var posCur = Curseur.getInstance().getPosition();
             switch (event.which) {
-                case 8://BS
+                case 8://Backspace
                     event.preventDefault();
                     if (chaineSansCurseur.length > 0 && posCur > 0) {
-                        chaineSansCurseur = retirerLettreAvant(chaineSansCurseur, posCur);
-                        decrementeChar();
+                        chaineSansCurseur = retirerLettreAvant(chaineSansCurseur, posCur); // Retire lettre
+                        decrementeChar(); // Décrémente le nombre de char à l'effacement
                         Curseur.getInstance().gauche();
                         contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
                     }
@@ -30,31 +30,31 @@
                 case 37: // gauche
                     if (posCur > 0 && contenu.textContent.length > 0) {
                         Curseur.getInstance().gauche();
-                        contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
+                        contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur))); // Mettre le curseur à gauche de la position précédente
                     }
                     break;
                 case 39: //droite
                     if (posCur < contenu.textContent.length - 1 && contenu.textContent.length > 0) {
                         Curseur.getInstance().droite();
-                        contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
+                        contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur))); // Mettre le curseur à droite de la position précédente
                     }
                     break;
                 case 40://down
                     if (posCur < contenu.textContent.length) {
-                        Curseur.getInstance().bas(TrouverPosCurseur(contenu.textContent, 'b'));
-                        contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
+                        Curseur.getInstance().bas(TrouverPosCurseur(contenu.textContent, 'b')); 
+                        contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur))); // Mettre le curseur en bas de la position précédente
                     }
                     break
                 case 38://up
                     if (posCur > 0) {
                         Curseur.getInstance().haut(TrouverPosCurseur(contenu.textContent, 'h'));
-                        contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
+                        contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur))); // Mettre le curseur en haut de la position précédente
                     }
                     break;
                 case 46://delete
                     if (posCur < chaineSansCurseur.length) {
-                        chaineSansCurseur = retirerLettreApres(chaineSansCurseur,posCur);
-                        decrementeChar();
+                        chaineSansCurseur = retirerLettreApres(chaineSansCurseur,posCur); // Retire la lettre a droite du curseur
+                        decrementeChar(); // Compteur de char --
                         contenu.innerHTML = lignifier(formater(ajouterCurseur(chaineSansCurseur)));
                     }
                     break;
