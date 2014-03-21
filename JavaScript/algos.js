@@ -291,7 +291,3 @@ function TrouverPosCurseur(s, direction) {
 
     return res;
 }
-
-function calculerNouvellePos(posLigne, posTab, direction) {
-
-}
