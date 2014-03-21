@@ -96,7 +96,6 @@ function lignifier(s) {
     compterLignesEtColonnes(tab);
 
     for (var i = 0; i < tab.length - 1; ++i) {
-        //res = res + "\n<span class='Numerote' >" + tab[i] + "</span>";
         res += "<span class='Numerote' >" + tab[i] + "\n</span>";
     }
     res += "<span class='Numerote' >" + tab[tab.length - 1] + "</span>";
@@ -262,7 +261,7 @@ function TrouverPosCurseur(s, direction) {
     if (direction == "haut") {
 
         if (posTab != 0) {
-            for (var i = 0; i < posTab - 1; ++i) {
+            for (var i = 0; i < posTab - 1; ++i) { // si pas sur la premiere ligne
                 res += tab[i].length + 1; // calcule la valeur + 1 car on considere ici que c'est une ligne sans \n ou il devraient y en avoir une
             }
             if (tab[posTab - 1].length <= posLigne) {
@@ -272,10 +271,9 @@ function TrouverPosCurseur(s, direction) {
                 res += posLigne;
             }
         }
-
     }
     else if (direction == "bas") {
-        if (posTab != tab.length - 1) {// si pas sur la derniere ligne {
+        if (posTab != tab.length - 1) {// si pas sur la derniere ligne 
             for (var i = 0; i <= posTab; ++i) {
                 res += tab[i].length + 1; // calcule la valeur + 1 car on considere ici que c'est une ligne sans \n ou il devraient y en avoir une
             }
