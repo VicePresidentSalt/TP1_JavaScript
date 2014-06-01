@@ -1,9 +1,9 @@
-// JavaScript source code
+﻿// JavaScript source code
 //par Francis cote et daren-ken st-laurent
+
+
 function keyWord(mot) {
-    var tableau = ["break", "case", "catch", "continue", "debugger", "default", "delete", "do",
-       "else", "finally", "for", "function", "if", "in", "instanceof", "new", "return", "switch",
-       "this", "throw", "try", "typeof", "var", "void", "while", "with"];
+    var tableau = ["break", "case", "catch", "continue", "debugger", "default", "delete", "do", "else", "finally", "for", "function", "if", "in", "instanceof", "new", "return", "switch", "this", "throw", "try", "typeof", "var", "void", "while", "with"];
     for (var i = 0; i < tableau.length; i++) {
         if (mot == tableau[i]) {
             return true;
@@ -22,16 +22,15 @@ function trouverDans(val, tab) {
 }
 
 // Cette fonction vérifie si le string (s) contient un char spécifique (c) et le retire entierement de la chaine.
+
 function retirerChar(char, mot) {
     for (var i = 0; i < mot.length; ++i) {
         if (mot[i] == char) {
             if (i == 0) {
                 mot = mot.substring(i + 1, mot.length);
-            }
-            else if (i == mot.length - 1) {
+            } else if (i == mot.length - 1) {
                 mot = mot.substring(0, i);
-            }
-            else {
+            } else {
                 mot = mot.substring(0, i) + mot.substring(i + 1, mot.length);
             }
         }
@@ -65,8 +64,7 @@ function formater(s) {
 }
 
 function isSpace(c) {
-    return c == ' ' || c == '\n' || c == '\r' ||
-       c == '\f' || c == '\t' || c == '\v';
+    return c == ' ' || c == '\n' || c == '\r' || c == '\f' || c == '\t' || c == '\v';
 }
 
 function négation(f) {
@@ -74,6 +72,7 @@ function négation(f) {
         return !f(arg);
     };
 }
+
 function subStr(s, début, fin) {
     var résultat = "";
     for (; début != fin; ++début) {
@@ -91,6 +90,7 @@ function trouverSi(s, pos, f) {
 
 var Compteur = (function () {
     var instance;
+
     function ZeCompteur() {
         this.mots = 0;
         this.char = 0;
@@ -112,6 +112,7 @@ var Compteur = (function () {
         }
 
     }
+
     function createInstance() {
         var singleton = new ZeCompteur();
         return singleton;
@@ -128,6 +129,7 @@ var Compteur = (function () {
 
 var Curseur = (function () {
     var instance;
+
     function ZeCurseur() {
         this.charactere = '►';
         this.position = 0;
@@ -154,6 +156,7 @@ var Curseur = (function () {
             }
         }
     }
+
     function createInstance() {
         var singleton = new ZeCurseur();
         return singleton;
@@ -173,11 +176,9 @@ function retirerChar(char, mot) {
         if (mot[i] == char) {
             if (i == 0) {
                 mot = mot.substring(i + 1, mot.length);
-            }
-            else if (i == mot.length - 1) {
+            } else if (i == mot.length - 1) {
                 mot = mot.substring(0, i);
-            }
-            else {
+            } else {
                 mot = mot.substring(0, i) + mot.substring(i + 1, mot.length);
             }
         }
@@ -205,8 +206,7 @@ function trouverLignePlusGrosse(tab) {
     var plusGrosse = 0;
 
     for (var i = 0; i < tab.length; ++i) {
-        if (plusGrosse < tab[i].length)
-            plusGrosse = tab[i].length;
+        if (plusGrosse < tab[i].length) plusGrosse = tab[i].length;
     }
     return plusGrosse;
 
@@ -233,22 +233,19 @@ function TrouverPosCurseur(s, direction) {
             }
             if (tab[posTab - 1].length <= posLigne) {
                 res += tab[posTab - 1].length;
-            }
-            else {
+            } else {
                 res += posLigne;
             }
         }
-    }
-    else if (direction == 'b') {
-        if (posTab != tab.length - 1) {// si pas sur la derniere ligne 
+    } else if (direction == 'b') {
+        if (posTab != tab.length - 1) { // si pas sur la derniere ligne 
             for (var i = 0; i <= posTab; ++i) {
                 res += tab[i].length + 1; // calcule la valeur + 1 car on considere ici que c'est une ligne sans \n ou il devraient y en avoir une
             }
             res--; // on a calculer le curseur on le retire
             if (tab[posTab + 1].length <= posLigne) {
                 res += tab[posTab + 1].length;
-            }
-            else {
+            } else {
                 res += posLigne;
             }
         }
